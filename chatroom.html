@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Room</title>
+    <script
+      src="https://cdn.socket.io/4.4.0/socket.io.min.js"
+      integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var socket = io.connect("http://127.0.0.1:5000");
+        // listen for the client to connect to the socket server
+        socket.on("connect", () => {
+          socket.send("User has connected");
+        });
+
+        // listen for when messages come back from the user
+        socket.on("message", (msg) => {
+          $("#messages").append(`<li> ${msg} </li>`);
+        });
+
+        $("#sendbutton").on("click", () => {
+          socket.send($("#myMessage").val());
+          $("#myMessage").val("");
+        });
+      });
+    </script>
+    <ul id="messages"></ul>
+    <input id="myMessage" type="text" />
+    <button id="sendbutton">Send</button>
+  </body>
+</html>
