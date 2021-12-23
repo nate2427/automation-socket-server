@@ -15,10 +15,11 @@
   <body>
     <script type="text/javascript">
       $(document).ready(function () {
+        // connect to the socket server
         var socket = io.connect("http://127.0.0.1:5000");
-        // listen for the client to connect to the socket server
+        // once connection is established, then emit the room to join
         socket.on("connect", () => {
-          socket.send("User has connected");
+          socket.emit("frontend interface joining server", { room: "SMBN" });
         });
 
         // listen for when messages come back from the user
