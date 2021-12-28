@@ -19,7 +19,7 @@
         var socket = io.connect("http://127.0.0.1:5000");
         // once connection is established, then emit the room to join
         socket.on("connect", () => {
-          socket.emit("frontend interface joining server", { room: "SMBN" });
+          socket.emit("backend brain joining server", 50020);
         });
 
         // listen for when messages come back from the user
@@ -28,7 +28,10 @@
         });
 
         $("#sendbutton").on("click", () => {
-          socket.send($("#myMessage").val());
+          socket.emit(
+            "frontend interface joining server",
+            $("#myMessage").val()
+          );
           $("#myMessage").val("");
         });
       });
