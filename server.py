@@ -53,7 +53,7 @@ def brain_joining(dport_num):
 
 @app.route("/")
 def hello():
-  return "What up doe!"
+  return "What up doe!!"
 
 if __name__ == "__main__":
   socketio_server.run(app)
