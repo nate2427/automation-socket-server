@@ -56,4 +56,7 @@ def hello():
   return "What up doe!!"
 
 if __name__ == "__main__":
-  socketio_server.run(app)
+    if app.config['ENV'] == 'development':
+        socketio_server.run(app)
+    else:
+        app.run()
